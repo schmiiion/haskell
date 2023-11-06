@@ -98,16 +98,16 @@ sumFact' n
 --6
 arithmeticSeries :: Int -> Int -> Int -> Int
 arithmeticSeries a n d
-        | n <= 1 = a -- TODO shouldnt it be less than 0
+        | n < 1 = a -- TODO shouldnt it be less than 0
         | otherwise = d + arithmeticSeries a (n - 1) d 
 
 
 --7 
 natural' :: Int -> Int 
-natural' n = arithmeticSeries 0 n 1
+natural' n = arithmeticSeries 0 (n - 1) 1
 
 odds' :: Int -> Int
-odds' n = arithmeticSeries 1 n 2 
+odds' n = arithmeticSeries 1 (n - 1) 2 
 
 
 --8
@@ -154,3 +154,22 @@ intSqrt' :: Int -> Int -> Int
 intSqrt' n m 
         | (m * m) < n = m 
         | otherwise = intSqrt' n (m - 1)
+
+
+--12
+fibo :: Int -> Int
+fibo 0 = 1
+fibo 1 = 1
+fibo n = fibo(n - 1) + fibo(n - 2)
+
+superFibo :: Int -> Int
+superFibo _ = 0
+
+-- fiboTwo n == (fibo n, fibo (n + 1))
+fiboTwo :: Int -> (Int, Int)
+fiboTwo 0 = (1,1)
+fiboTwo 1 = (1,2)
+fiboTwo n = step (fiboTwo (n-1))
+
+step :: (Int, Int) -> (Int, Int)
+step (x, y) = (y, x+y)
